@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Book Shop</title>
+</head>
+
+<body onload="onInit()">
+    
+    <h1 class="display-4 mt-4" data-trans="title">Welcome to my bookshop</h1>
+
+    <section class="book-filter">
+
+        <select onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+          </select>
+
+        <form onsubmit="onSearchBook(event)">
+            <input class="search-box" type="search" name="book-search" data-trans="search-box" placeholder="Search book...">
+            <button class="search-btn btn" data-trans="search">Search</button>
+        </form>
+
+        <label >
+           <span data-trans="max-price-lable"> Max price: </span>
+            <input type="range" min="0" max="100" value="100" class="filter-max-price"
+            onchange="this.title=this.value;onSetSortBy({maxPrice: this.value})" />
+        <br>
+           <span data-trans="min-rate-lable"> Min rate: </span>
+            <input type="range" min="-1" max="10" value="2" class="filter-min-rate" 
+            onchange="this.title=this.value;onSetSortBy({minRate: this.value})" />
+        </label>
+    </section>
+    
+    <div class="add-modal"> 
+        <form onsubmit="onAddBook()">
+            <button onclick="onCloseModal()" class="close btn">X</button>
+            <label>
+                <span>Book Title</span> <br>
+                <input type="text" class="new-book-title" placeholder="Insert book name"> <br>
+                <span>Book Price</span> <br>
+                <input type="number" class="new-book-price" placeholder="Insert book price">
+            </label> <br>
+            <button class="adding-btn btn">Add</button>
+        </form>
+    </div>
+    
+    <section class="books-container">
+        <div class="btns">
+            <button class="nextpage-btn btn" data-trans="next-page" onclick="onNextPage()">Next Page</button>
+            <button class="add-btn btn" data-trans="add" onclick="onOpenAddBookForm()">Create new book</button>
+        </div>
+            <table class="table table-striped book-shelf">
+                <thead>
+                    <th><span data-trans="id"> Id</span></th>
+                    <th id="title" onclick="onSortTable(this.id)" data-trans="book-name">Title</th>
+                    <th id="price" onclick="onSortTable(this.id)" data-trans="price">Price</th>
+                    <th data-trans="rate">Rate</th>
+                    <th data-trans="actions">Actions</th>
+                </thead>
+                <tbody class="table-body">
+                    
+                </tbody>
+            </table>
+    </section>
+    
+
+    
+    <div class="modal fade">
+     </div>
+
+</body>
+
+<script src="lib/jquery-3.6.1.js"></script>
+<script src="js/services/i18n.service.js"></script>
+<script src="js/services/util.service.js"></script>
+<script src="js/services/bookshop.service.js"></script>
+<script src="js/bookshop.controller.js"></script>
+
+</html>
